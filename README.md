@@ -12,10 +12,10 @@
 7. 下载VOC2012数据集：http://cvlab.postech.ac.kr/~mooyeol/pascal_voc_2012/#devkit ，解压置于路径./A/B/下
 8. 准备训练集：将VOC格式数据 -> .record格式(API使用)	 <br>
   8.1 将./object_detection/dataset_tools/create_pascal_tf_record.py L165 行按如下方式修改： <br>
-examples_path = os.path.join(data_dir, year, 'ImageSets', 'Main', FLAGS.set + '.txt') <br>
-原文件如下	         data_dir, year, 'ImageSets', 'Main', 'aeroplane_' + FLAGS.set + '.txt' <br>
+        examples_path = os.path.join(data_dir, year, 'ImageSets', 'Main', FLAGS.set + '.txt') <br>
+        原文件如下	         data_dir, year, 'ImageSets', 'Main', 'aeroplane_' + FLAGS.set + '.txt' <br>
   8.2 在./research目录下运行脚本 pascal_to_tfrecord.sh #自己修改脚本中路径绝对路径 <br>
-生成的TFRecord文件pascal_train.record, pascal_val.record在./A/B/目录中
+        生成的TFRecord文件pascal_train.record, pascal_val.record在./A/B/目录中
 9. 拷贝./object_detection/data/pascal_label_map.pbtxt和./object_detection/samples/configs/ssd_mobilenet_v1_coco.config至 ./A/B/AngelEye/config路径下,并对ssd_mobilenet_v1_coco.config做如下修改：  <br>
   9.1 num_classes:修改为自己的classes num ，这里为20  <br>
   9.2 将所有PATH_TO_BE_CONFIGURED的地方类比修改为自己之前设置的路径（5处），按照自己的路径修改即可，修改如下： <br>
@@ -35,5 +35,7 @@ examples_path = os.path.join(data_dir, year, 'ImageSets', 'Main', FLAGS.set + '.
 13. 测试，运行脚本 test_models.sh
 14. 可视化 tensorboard --logdir A/B/ssd_mobilenet_train_logs/ , 然后在浏览器中输入 http://192.168.1.108:6006/ ，即出现可视化界面
 15. 参数修改： <br>
-    IOU参数：修改./research/object_detection/utils/object_detection_evaluation.py文件中Line301 class OpenImagesDetectionEvaluator(ObjectDetectionEvaluator),def __init__(matching_iou_threshold=0.66)中数值即可(默认0.5)。 <br>
-    metrics参数： 修改validation_eval_config.pbtxt文件中metrics_set: 'open_images_metrics' 或 ‘pascal_voc_metrics’
+    15.1 IOU参数： <br>
+        修改./research/object_detection/utils/object_detection_evaluation.py文件中Line301 class OpenImagesDetectionEvaluator(ObjectDetectionEvaluator),def __init__(matching_iou_threshold=0.66)中数值即可(默认0.5)。 <br>
+    15.2 metrics参数： <br>
+        修改validation_eval_config.pbtxt文件中metrics_set: 'open_images_metrics' 或 ‘pascal_voc_metrics’
