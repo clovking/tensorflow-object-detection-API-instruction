@@ -3,7 +3,7 @@
 1. 安装TensorFlow
 2. 下载tensorflow/models模块，git clone https://github.com/tensorflow/models.git
 3. 编译protobuf
-    ./research$ protoc object_detection/protos/*.proto --python_out=.  # .表示model的根目录
+        ./research$ protoc object_detection/protos/*.proto --python_out=.  # .表示model的根目录
 4. slim 文件夹加入到 PYTHONPATH环境变量中，用Slim作特征抽取
     ./research$ export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim 或 将 export PYTHONPATH="./research:./research/slim:$PYTHONPATH" 添加到~/.bashrc最后一行并source ~/.bashrc
 5. 检测 Tensorflow Object Detection API 是否正确安装
